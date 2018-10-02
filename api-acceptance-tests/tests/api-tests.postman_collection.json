@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "41d77145-7a2a-47a9-bba0-91c0116ef03f",
+		"name": "api-tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/user/igor Create User 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "359d6316-6301-474e-b532-bd0cb94b7080",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"New user is returned\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"igor\");",
+							"    pm.expect(jsonData.email).to.eql(\"ig.gladun@gmail.com\");",
+							"    pm.expect(jsonData.birthdate).to.eql(\"12/12/2012\");",
+							"    pm.expect(jsonData.address).to.eql(\"1133 Budapest\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"igor\",\n\t\"email\": \"ig.gladun@gmail.com\",\n\t\"birthdate\": \"12/12/2012\",\n\t\"address\": \"1133 Budapest\"\n}"
+				},
+				"url": {
+					"raw": "http://{{env-url}}/user/igor",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"user",
+						"igor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/igor Create Duplicate User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ea22c90-2914-44f5-a937-93a64fb15e1b",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Error message is correct\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"A user with name 'igor' already exists.\");",
+							"});",
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"igor\",\n\t\"email\": \"ig.gladun@gmail.com\",\n\t\"birthdate\": \"12/12/2012\",\n\t\"address\": \"1133 Budapest\"\n}"
+				},
+				"url": {
+					"raw": "http://{{env-url}}/user/igor",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"user",
+						"igor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/Tom Create User 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c03c16f7-aa1c-4041-9d3c-ad46fa01495e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"New user is returned\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Tom\");",
+							"    pm.expect(jsonData.email).to.eql(\"tom@tomtom.com\");",
+							"    pm.expect(jsonData.birthdate).to.eql(\"01/11/1912\");",
+							"    pm.expect(jsonData.address).to.eql(\"12345 NYC\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Tom\",\n\t\"email\": \"tom@tomtom.com\",\n\t\"birthdate\": \"01/11/1912\",\n\t\"address\": \"12345 NYC\"\n}"
+				},
+				"url": {
+					"raw": "http://{{env-url}}/user/Tom",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"user",
+						"Tom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/igor Get User ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9277bc07-5f4e-4678-b82f-952edeffc749",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Correct user is returned\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"igor\");",
+							"    pm.expect(jsonData.email).to.eql(\"ig.gladun@gmail.com\");",
+							"    pm.expect(jsonData.birthdate).to.eql(\"12/12/2012\");",
+							"    pm.expect(jsonData.address).to.eql(\"1133 Budapest\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "p_flow_id",
+							"value": "185",
+							"type": "text"
+						},
+						{
+							"key": "p_flow_step_id",
+							"value": "130",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_num_return",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_name",
+							"value": "worksheet",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_mod",
+							"value": "ACTION",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action",
+							"value": "PAGE",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action_mod",
+							"value": "pgR_min_row=1max_rows=15rows_fetched=15",
+							"type": "text"
+						},
+						{
+							"key": "x01",
+							"value": "555215554758934859",
+							"type": "text"
+						},
+						{
+							"key": "x02",
+							"value": "555216849652934863",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{env-url}}/user/igor",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"user",
+						"igor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/users Get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9fd1f1c-bfd0-4b7e-820d-04581135cef7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"var list = jsonData['users'].length;",
+							"tests[\"Check that service retuns 2 records\"] = list === 2;",
+							"",
+							"pm.test(\"Valid records are returned\", function () {",
+							"    console.log(jsonData)",
+							"    pm.expect(jsonData['users'][0].name).to.eql(\"igor\");",
+							"    pm.expect(jsonData['users'][0].email).to.eql(\"ig.gladun@gmail.com\");",
+							"    pm.expect(jsonData['users'][0].birthdate).to.eql(\"12/12/2012\");",
+							"    pm.expect(jsonData['users'][0].address).to.eql(\"1133 Budapest\");",
+							"    ",
+							"    pm.expect(jsonData['users'][1].name).to.eql(\"Tom\");",
+							"    pm.expect(jsonData['users'][1].email).to.eql(\"tom@tomtom.com\");",
+							"    pm.expect(jsonData['users'][1].birthdate).to.eql(\"01/11/1912\");",
+							"    pm.expect(jsonData['users'][1].address).to.eql(\"12345 NYC\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "p_flow_id",
+							"value": "185",
+							"type": "text"
+						},
+						{
+							"key": "p_flow_step_id",
+							"value": "130",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_num_return",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_name",
+							"value": "worksheet",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_mod",
+							"value": "ACTION",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action",
+							"value": "PAGE",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action_mod",
+							"value": "pgR_min_row=1max_rows=15rows_fetched=15",
+							"type": "text"
+						},
+						{
+							"key": "x01",
+							"value": "555215554758934859",
+							"type": "text"
+						},
+						{
+							"key": "x02",
+							"value": "555216849652934863",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{env-url}}/users",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/xxxx Get Not Existing User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed4528d1-6889-4b07-b243-4138e2fc3578",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"pm.test(\"Error message is correct\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.eql(\"User not found\");",
+							"});",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "p_flow_id",
+							"value": "185",
+							"type": "text"
+						},
+						{
+							"key": "p_flow_step_id",
+							"value": "130",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_num_return",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_name",
+							"value": "worksheet",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_mod",
+							"value": "ACTION",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action",
+							"value": "PAGE",
+							"type": "text"
+						},
+						{
+							"key": "p_widget_action_mod",
+							"value": "pgR_min_row=1max_rows=15rows_fetched=15",
+							"type": "text"
+						},
+						{
+							"key": "x01",
+							"value": "555215554758934859",
+							"type": "text"
+						},
+						{
+							"key": "x02",
+							"value": "555216849652934863",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{env-url}}/user/xxxx",
+					"protocol": "http",
+					"host": [
+						"{{env-url}}"
+					],
+					"path": [
+						"user",
+						"xxxx"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
