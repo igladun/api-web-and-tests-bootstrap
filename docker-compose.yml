@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  api-service:
+    build: ./api
+    volumes:
+     - ./api/src:/home/docker/code
+     - ./test-results/api-service:/home/docker/code/tests
+    ports:
+      - 5000:5000
+
+  api-tests:
+      build: ./api-acceptance-tests
+      volumes:
+       - ./test-results/api-tests:/home/docker/code/newman
+      depends_on:
+      - api-service
+
+  web-service:
+    build: ./web
+    volumes:
+     - ./web/src:/home/docker/code
+     - ./test-results/web-service:/home/docker/code/tests
+    ports:
+      - 5005:80
+
+  web-tests:
+      build: ./web-acceptance-tests
+      volumes:
+       - ./test-results/web-tests:/home/docker/code/tests
+      depends_on:
+      - web-service
