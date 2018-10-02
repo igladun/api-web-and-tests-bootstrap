@@ -10,7 +10,7 @@ class BaseTest(TestCase):
     CREATE_USER_URL = TEST_URL + '/create'
 
 
-    IMPLICIT_WAIT = 30
+    IMPLICIT_WAIT = 10
 
     def setUp(self):
         options = webdriver.ChromeOptions()
