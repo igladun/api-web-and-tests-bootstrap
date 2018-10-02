@@ -45,8 +45,7 @@
 					"raw": "{\n\t\"name\": \"igor\",\n\t\"email\": \"ig.gladun@gmail.com\",\n\t\"birthdate\": \"12/12/2012\",\n\t\"address\": \"1133 Budapest\"\n}"
 				},
 				"url": {
-					"raw": "http://{{env-url}}/user/igor",
-					"protocol": "http",
+					"raw": "{{env-url}}/user/igor",
 					"host": [
 						"{{env-url}}"
 					],
@@ -94,8 +93,7 @@
 					"raw": "{\n\t\"name\": \"igor\",\n\t\"email\": \"ig.gladun@gmail.com\",\n\t\"birthdate\": \"12/12/2012\",\n\t\"address\": \"1133 Budapest\"\n}"
 				},
 				"url": {
-					"raw": "http://{{env-url}}/user/igor",
-					"protocol": "http",
+					"raw": "{{env-url}}/user/igor",
 					"host": [
 						"{{env-url}}"
 					],
@@ -147,8 +145,7 @@
 					"raw": "{\n\t\"name\": \"Tom\",\n\t\"email\": \"tom@tomtom.com\",\n\t\"birthdate\": \"01/11/1912\",\n\t\"address\": \"12345 NYC\"\n}"
 				},
 				"url": {
-					"raw": "http://{{env-url}}/user/Tom",
-					"protocol": "http",
+					"raw": "{{env-url}}/user/Tom",
 					"host": [
 						"{{env-url}}"
 					],
@@ -241,8 +238,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{env-url}}/user/igor",
-					"protocol": "http",
+					"raw": "{{env-url}}/user/igor",
 					"host": [
 						"{{env-url}}"
 					],
@@ -338,8 +334,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{env-url}}/users",
-					"protocol": "http",
+					"raw": "{{env-url}}/users",
 					"host": [
 						"{{env-url}}"
 					],
@@ -427,8 +422,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://{{env-url}}/user/xxxx",
-					"protocol": "http",
+					"raw": "{{env-url}}/user/xxxx",
 					"host": [
 						"{{env-url}}"
 					],
