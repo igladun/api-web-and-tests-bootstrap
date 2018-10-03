@@ -30,17 +30,32 @@ services:
 #      - api-service
 
 
+
+
+  web-db:
+      image: postgres:11-alpine
+      environment:
+            POSTGRES_USER : test
+            POSTGRES_PASSWORD: test
+            POSTGRES_DB : api
+      ports:
+       - 5432:5432
+
   web-service:
     build: ./web
+    environment:
+        DATABASE_URL: postgresql://test:test@web-db/api
+
     volumes:
      - ./web/src:/home/docker/code
-     - ./test-results/web-unit:/tmp/test_report/
     ports:
       - 5005:80
+    depends_on:
+     - web-db
 
   web-tests:
       build: ./web-acceptance-tests
       volumes:
-       - ./test-results/web-e2e:/home/docker/code/tests/report
+       - ./test-results/web-e2e:/tmp/test_report/
       depends_on:
       - web-service
