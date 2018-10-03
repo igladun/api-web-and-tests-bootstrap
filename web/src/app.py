@@ -10,6 +10,9 @@ app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 
 
+def wrap_to_html(text):
+    return '<span id ="message">{}</span>'.format(text)
+
 
 @app.route('/list')
 def user_list():
@@ -23,7 +26,7 @@ def create_user():
         data = request.form
 
         if UserModel.find_by_name(request.form['name']):
-            return 'A user with name {} already exists.'.format(data['name']), 400
+            return wrap_to_html('A user with name {} already exists.'.format(data['name'])), 400
 
         user = UserModel(name=data['name'],
                          email=data['email'],
@@ -33,9 +36,9 @@ def create_user():
         try:
             user.save_to_db()
         except:
-            return 'An error occured while createing the user', 500
+            return wrap_to_html('An error occured while createing the user'), 500
 
-        return 'User {} created'.format(request.form['name']), 201
+        return wrap_to_html('User {} created'.format(request.form['name'])), 201
     else:
         return render_template('create.html')
 

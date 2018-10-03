@@ -1,35 +1,33 @@
 version: '3'
 
 services:
-#  api-db:
-#      image: postgres:11-alpine
-#      environment:
-#            POSTGRES_USER : test
-#            POSTGRES_PASSWORD: test
-#            POSTGRES_DB : api
-#      ports:
-#       - 5432:5432
-#
-#  api-service:
-#    build: ./api
-#    environment:
-#        DATABASE_URL: postgresql://test:test@api-db/api
-#    volumes:
-#     - ./api/src:/home/docker/code
-#     - ./test-results/api-unit:/tmp/test_report/
-#    ports:
-#      - 5000:5000
-#    depends_on:
-#      - api-db
-#
-#  api-tests:
-#      build: ./api-acceptance-tests
-#      volumes:
-#       - ./test-results/api-e2e:/home/docker/code/newman
-#      depends_on:
-#      - api-service
+  api-db:
+      image: postgres:11-alpine
+      environment:
+            POSTGRES_USER : test
+            POSTGRES_PASSWORD: test
+            POSTGRES_DB : api
+      ports:
+       - 5432:5432
 
+  api-service:
+    build: ./api
+    environment:
+        DATABASE_URL: postgresql://test:test@api-db/api
+    volumes:
+     - ./api/src:/home/docker/code
+     - ./test-results/api-unit:/tmp/test_report/
+    ports:
+      - 5000:5000
+    depends_on:
+      - api-db
 
+  api-tests:
+      build: ./api-acceptance-tests
+      volumes:
+       - ./test-results/api-e2e:/home/docker/code/newman
+      depends_on:
+      - api-service
 
 
   web-db:
@@ -39,7 +37,7 @@ services:
             POSTGRES_PASSWORD: test
             POSTGRES_DB : api
       ports:
-       - 5432:5432
+       - 5433:5432
 
   web-service:
     build: ./web
