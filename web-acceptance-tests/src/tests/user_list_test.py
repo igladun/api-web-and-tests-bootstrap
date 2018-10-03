@@ -1,4 +1,3 @@
-
 from pages.users_list_page import UsersListPage
 from tests.base_test import BaseTest
 

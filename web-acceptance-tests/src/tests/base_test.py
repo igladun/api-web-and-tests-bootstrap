@@ -5,7 +5,10 @@ from unittest import TestCase
 
 
 class BaseTest(TestCase):
-    TEST_URL = os.environ.get('web-service:80', 'localhost:5005')
+    if os.environ.get('INSIDE_DOCKER', False):
+        TEST_URL = 'http://web-service:80'
+    else:
+        TEST_URL = 'http://localhost:5005'
     USER_LIST_URL = TEST_URL + '/list'
     CREATE_USER_URL = TEST_URL + '/create'
 
