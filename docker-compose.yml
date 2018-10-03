@@ -16,7 +16,7 @@ services:
         DATABASE_URL: postgresql://test:test@api-db/api
     volumes:
      - ./api/src:/home/docker/code
-     - ./test-results/api-service:/home/docker/code/tests
+     - ./test-results/api-service:/home/docker/code/tests/report
     ports:
       - 5000:5000
     depends_on:
@@ -34,13 +34,13 @@ services:
     build: ./web
     volumes:
      - ./web/src:/home/docker/code
-     - ./test-results/web-service:/home/docker/code/tests
+     - ./test-results/web-service:/home/docker/code/tests/report
     ports:
       - 5005:80
 
   web-tests:
       build: ./web-acceptance-tests
       volumes:
-       - ./test-results/web-tests:/home/docker/code/tests
+       - ./test-results/web-tests:/home/docker/code/tests/report
       depends_on:
       - web-service
