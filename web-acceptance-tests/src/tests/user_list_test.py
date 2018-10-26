@@ -3,10 +3,9 @@ from tests.base_test import BaseTest
 
 
 class UserListTest(BaseTest):
-
     def setUp(self):
         super(UserListTest, self).setUp()
-        self.driver.get(BaseTest.USER_LIST_URL)
+        UsersListPage.go_to_page(self)
 
     def test_title(self):
         users_page = UsersListPage(self.driver)

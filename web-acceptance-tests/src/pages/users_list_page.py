@@ -8,6 +8,9 @@ class UsersListPage(BasePage):
     TABLE_HEADER_BIRTHDAY = By.ID, 'th_bd'
     TABLE_HEADER_ADDRESS = By.ID, 'th_address'
 
+    def go_to_page(self):
+        self.driver.get(BasePage.TEST_URL + '/list')
+
     def get_table_header_name(self):
         return self.driver.find_element(*UsersListPage.TABLE_HEADER_NAME)
 
